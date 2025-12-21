@@ -2,10 +2,10 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Wedding Website | Woaud & Hamair</title>
 
-  <!-- Classic fonts (Google Fonts) -->
+  <!-- Classic fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -46,16 +46,7 @@
     :root{
       --ink:#2a1f29;
       --muted:#6b5a66;
-
-      --blush-50:#fff1f6;
-      --blush-100:#ffe4ee;
-      --blush-200:#ffc7dc;
-      --blush-300:#ff9fc3;
-      --blush-400:#ff6da5;
-      --blush-500:#ff3d87;
-
       --hairline: rgba(255, 61, 135, 0.22);
-      --hairline2: rgba(42, 31, 41, 0.08);
       --shadow: 0 18px 40px rgba(42,31,41,0.10);
     }
 
@@ -67,55 +58,30 @@
         radial-gradient(900px 520px at 15% 18%, rgba(255,241,246,0.95), transparent 55%),
         linear-gradient(180deg, #ffffff, rgba(255,241,246,0.9));
       font-family: "Cormorant Garamond", "Garamond", "Georgia", "Times New Roman", serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
-    /* Elegant tulip background (requested) */
+    /* Tulip background */
     .tulip-bg::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
       z-index:0;
-      opacity:0.16;
+      opacity:0.14;
       background-repeat: repeat;
       background-size: 320px 320px;
       background-position: center;
-      /* Repeating tulip pattern (inline SVG) */
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%23ffe4ee'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='320' height='320' fill='url(%23g)'/%3E%3Cg opacity='0.95'%3E%3Cg transform='translate(70 78)'%3E%3Cpath d='M38 130c10-34 4-62-10-96-8-18-6-39 4-56' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 132c0-42-14-70-24-98-7-18-4-40 10-56' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M106 130c-10-35-2-60 14-94 9-18 9-37 0-55' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M48 58c8-18 22-20 30-4 8-16 22-14 30 4-6 26-20 41-30 48-10-7-24-22-30-48z' fill='%23ff6da5' fill-opacity='0.65'/%3E%3Cpath d='M78 36c5-13 17-13 22 0-3 16-12 25-17 29-6-4-15-13-5-29z' fill='%23ffc7dc' fill-opacity='0.85'/%3E%3C/g%3E%3Cg transform='translate(210 210) scale(0.9)'%3E%3Cpath d='M38 130c10-34 4-62-10-96-8-18-6-39 4-56' fill='none' stroke='%23ff3d87' stroke-opacity='0.45' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 132c0-42-14-70-24-98-7-18-4-40 10-56' fill='none' stroke='%23ff3d87' stroke-opacity='0.45' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M106 130c-10-35-2-60 14-94 9-18 9-37 0-55' fill='none' stroke='%23ff3d87' stroke-opacity='0.45' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M48 58c8-18 22-20 30-4 8-16 22-14 30 4-6 26-20 41-30 48-10-7-24-22-30-48z' fill='%23ff6da5' fill-opacity='0.55'/%3E%3Cpath d='M78 36c5-13 17-13 22 0-3 16-12 25-17 29-6-4-15-13-5-29z' fill='%23ffc7dc' fill-opacity='0.8'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      filter: blur(0.2px);
-    }
-
-    /* Soft vignette overlay for depth */
-    .tulip-bg::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      z-index:0;
-      background:
-        radial-gradient(900px 420px at 50% 0%, rgba(255,255,255,0.55), transparent 65%),
-        radial-gradient(900px 520px at 50% 100%, rgba(255,255,255,0.35), transparent 70%);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='35%25' r='70%25'%3E%3Cstop offset='0%25' stop-color='%23ffe4ee'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='320' height='320' fill='url(%23g)'/%3E%3Cg opacity='0.95'%3E%3Cg transform='translate(70 78)'%3E%3Cpath d='M38 130c10-34 4-62-10-96-8-18-6-39 4-56' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M72 132c0-42-14-70-24-98-7-18-4-40 10-56' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M106 130c-10-35-2-60 14-94 9-18 9-37 0-55' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M48 58c8-18 22-20 30-4 8-16 22-14 30 4-6 26-20 41-30 48-10-7-24-22-30-48z' fill='%23ff6da5' fill-opacity='0.65'/%3E%3Cpath d='M78 36c5-13 17-13 22 0-3 16-12 25-17 29-6-4-15-13-5-29z' fill='%23ffc7dc' fill-opacity='0.85'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      filter: blur(0.25px);
     }
 
     .muted{ color:var(--muted); }
+    .hairline{ height:1px; background: linear-gradient(90deg, transparent, var(--hairline), transparent); }
 
-    /* Avoid “boxes”: use airy sections with subtle hairlines */
-    .section{
-      position:relative;
-      z-index:1;
-    }
-    .hairline{
-      height:1px;
-      background: linear-gradient(90deg, transparent, var(--hairline), transparent);
-    }
-    .subhairline{
-      height:1px;
-      background: linear-gradient(90deg, transparent, var(--hairline2), transparent);
-    }
-
-    /* Elegant panel for form/table only (not for body text) */
     .panel{
-      background: rgba(255,255,255,0.62);
+      background: rgba(255,255,255,0.66);
       border: 1px solid rgba(255,61,135,0.14);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
@@ -123,69 +89,53 @@
       border-radius: 22px;
     }
 
-    /* Tailwind UI-like inputs */
     .ui-input, .ui-select, .ui-textarea{
       width:100%;
-      border-radius: 14px;
+      border-radius: 16px;
       border: 1px solid rgba(255,61,135,0.18);
-      background: rgba(255,255,255,0.85);
-      padding: 0.7rem 0.9rem;
+      background: rgba(255,255,255,0.90);
+      padding: 0.85rem 1rem;
       font-size: 1rem;
       outline:none;
     }
     .ui-input:focus, .ui-select:focus, .ui-textarea:focus{
-      box-shadow: 0 0 0 5px rgba(255,61,135,0.16);
+      box-shadow: 0 0 0 6px rgba(255,61,135,0.14);
       border-color: rgba(255,61,135,0.65);
     }
 
-    /* Buttons (no icon libs) */
     .btn{
       border-radius: 999px;
-      padding: 0.65rem 1.05rem;
+      padding: 0.85rem 1.1rem;
       font-weight: 700;
       letter-spacing: 0.01em;
       transition: 140ms;
       outline:none;
       font-family: "Playfair Display","Cormorant Garamond",serif;
+      min-height: 44px;
     }
-    .btn:focus{ box-shadow: 0 0 0 5px rgba(255,61,135,0.16); }
+    .btn:focus{ box-shadow: 0 0 0 6px rgba(255,61,135,0.14); }
     .btn-primary{
       background: linear-gradient(180deg, rgba(255,61,135,1), rgba(255,109,165,1));
       color:#fff;
       box-shadow: 0 14px 28px rgba(255,61,135,0.22);
     }
-    .btn-primary:hover{ transform: translateY(-1px); }
     .btn-secondary{
-      background: rgba(255,255,255,0.75);
+      background: rgba(255,255,255,0.80);
       border:1px solid rgba(255,61,135,0.18);
-      color: var(--ink);
+      color: #2a1f29;
     }
-    .btn-secondary:hover{ background: rgba(255,241,246,0.95); }
     .btn-danger{
       background: linear-gradient(180deg, #e11d48, #fb7185);
       color:#fff;
     }
-    .btn-danger:hover{ transform: translateY(-1px); }
 
-    /* Ornamental divider with a small tulip silhouette */
-    .ornament{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      justify-content:center;
-      opacity:0.95;
-    }
-    .ornament .line{
-      height:1px;
-      width:120px;
-      background: linear-gradient(90deg, transparent, rgba(255,61,135,0.35), transparent);
-    }
+    .safe-top{ padding-top: env(safe-area-inset-top); }
+    .safe-bottom{ padding-bottom: env(safe-area-inset-bottom); }
 
-    /* Print A4 */
     @media print{
       .no-print{ display:none !important; }
       body{ background:#fff !important; }
-      .tulip-bg::before, .tulip-bg::after{ display:none !important; }
+      .tulip-bg::before{ display:none !important; }
       .panel{ box-shadow:none !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; background:#fff !important; }
       .print-page{
         width:210mm;
@@ -214,7 +164,6 @@
         email: "woaud94almuzaini@gmail.com"
       };
 
-      // ---------- Utilities ----------
       function uid(){ return "id_" + Math.random().toString(16).slice(2) + "_" + Date.now().toString(16); }
 
       function useCountdown(targetISO){
@@ -245,13 +194,14 @@
       }
 
       function exportToExcel(rows){
-        const wsData = [["Name","Phone","Status","Message","Submitted At"]];
+        const wsData = [["Name","Phone","Status","Message","Song Request","Submitted At"]];
         rows.forEach(r=>{
           wsData.push([
             r.name || "",
             r.phone || "",
             r.status === "attending" ? "Attending" : r.status === "not_attending" ? "Not Attending" : "Undecided",
             r.message || "",
+            r.song || "",
             r.createdAt ? new Date(r.createdAt).toLocaleString() : ""
           ]);
         });
@@ -261,8 +211,8 @@
         XLSX.writeFile(wb, "Wedding_RSVPs.xlsx");
       }
 
-      // ---------- IndexedDB ----------
-      const DB_NAME="WeddingSiteDB_Beautiful_EN";
+      // IndexedDB
+      const DB_NAME="WeddingSiteDB_Mobile_Song";
       const DB_VERSION=1;
       const STORE="rsvps";
 
@@ -273,8 +223,6 @@
             const db = ev.target.result;
             if(!db.objectStoreNames.contains(STORE)){
               const os = db.createObjectStore(STORE, { keyPath:"id" });
-              os.createIndex("by_name","name",{unique:false});
-              os.createIndex("by_status","status",{unique:false});
               os.createIndex("by_createdAt","createdAt",{unique:false});
             }
           };
@@ -320,13 +268,10 @@
         });
       }
 
-      // ---------- UI primitives ----------
+      // UI
       function Button({children, onClick, type="button", variant="primary", className="", disabled=false}){
         const v = variant==="primary" ? "btn-primary" : variant==="danger" ? "btn-danger" : "btn-secondary";
-        return e("button", {
-          type, onClick, disabled,
-          className: "btn " + v + " " + className + (disabled ? " opacity-60 cursor-not-allowed" : "")
-        }, children);
+        return e("button", { type, onClick, disabled, className:"btn "+v+" "+className+(disabled?" opacity-60 cursor-not-allowed":"") }, children);
       }
 
       function Field({label, hint, children}){
@@ -339,18 +284,6 @@
         ]);
       }
 
-      function Ornament(){
-        return e("div",{className:"ornament my-6"},[
-          e("div",{className:"line"}),
-          e("svg",{width:"20",height:"20",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg"},[
-            e("path",{d:"M12 21s-1-4 0-7 4-4 4-7c0-2-2-4-4-4s-4 2-4 4c0 3 3 4 4 7s0 7 0 7Z",fill:"#ff6da5",fillOpacity:"0.55"}),
-            e("path",{d:"M12 7c-1 0-2 .7-2 1.7 0 1.5 1.7 2.2 2 3.3.3-1.1 2-1.8 2-3.3C14 7.7 13 7 12 7Z",fill:"#ffc7dc",fillOpacity:"0.9"})
-          ]),
-          e("div",{className:"line"})
-        ]);
-      }
-
-      // ---------- Chart ----------
       function RSVPChart({stats}){
         const canvasRef = React.useRef(null);
         const chartRef = React.useRef(null);
@@ -360,11 +293,7 @@
 
           const data = {
             labels: ["Attending","Not Attending","Undecided"],
-            datasets: [{
-              label:"RSVPs",
-              data:[stats.attending, stats.notAttending, stats.unknown],
-              borderWidth: 1
-            }]
+            datasets: [{ label:"RSVPs", data:[stats.attending, stats.notAttending, stats.unknown], borderWidth:1 }]
           };
 
           if(chartRef.current){
@@ -386,18 +315,18 @@
           return ()=>{ if(chartRef.current){ chartRef.current.destroy(); chartRef.current=null; } };
         },[stats.attending, stats.notAttending, stats.unknown]);
 
-        return e("canvas",{ref:canvasRef, height:150});
+        return e("canvas",{ref:canvasRef, height:160});
       }
 
-      // ---------- App ----------
       function App(){
         const [tab, setTab] = React.useState("home"); // home | dashboard | report
+        const [menuOpen, setMenuOpen] = React.useState(false);
         const cd = useCountdown(WEDDING.dateISO);
 
         const [items, setItems] = React.useState([]);
         const [loading, setLoading] = React.useState(true);
 
-        const [form, setForm] = React.useState({ id:null, name:"", phone:"", status:"attending", message:"" });
+        const [form, setForm] = React.useState({ id:null, name:"", phone:"", status:"attending", message:"", song:"" });
         const [q, setQ] = React.useState("");
         const [statusFilter, setStatusFilter] = React.useState("all");
         const importRef = React.useRef(null);
@@ -428,7 +357,7 @@
         const stats = statsFrom(items);
 
         const filtered = items.filter(x=>{
-          const hay = ((x.name||"")+" "+(x.phone||"")+" "+(x.message||"")).toLowerCase();
+          const hay = ((x.name||"")+" "+(x.phone||"")+" "+(x.message||"")+" "+(x.song||"")).toLowerCase();
           const matchesQ = !q || hay.includes(q.toLowerCase());
           const matchesStatus = statusFilter==="all" ? true : x.status===statusFilter;
           return matchesQ && matchesStatus;
@@ -446,6 +375,7 @@
             phone: (form.phone||"").trim(),
             status: form.status,
             message: (form.message||"").trim(),
+            song: (form.song||"").trim(),
             createdAt: form.id ? (items.find(i=>i.id===form.id)?.createdAt || now) : now,
             updatedAt: now
           };
@@ -456,7 +386,7 @@
             next.unshift(item);
             next.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
             setItems(next);
-            setForm({ id:null, name:"", phone:"", status:"attending", message:"" });
+            setForm({ id:null, name:"", phone:"", status:"attending", message:"", song:"" });
             setTab("dashboard");
           }catch(err){
             console.error(err);
@@ -470,9 +400,11 @@
             name: row.name || "",
             phone: row.phone || "",
             status: row.status || "unknown",
-            message: row.message || ""
+            message: row.message || "",
+            song: row.song || ""
           });
           setTab("dashboard");
+          setMenuOpen(false);
         }
 
         async function remove(id){
@@ -516,6 +448,7 @@
               phone: (r.phone||"").toString(),
               status: (r.status==="attending"||r.status==="not_attending"||r.status==="unknown") ? r.status : "unknown",
               message: (r.message||"").toString(),
+              song: (r.song||"").toString(),
               createdAt: r.createdAt || now,
               updatedAt: now
             }));
@@ -534,134 +467,163 @@
           }
         }
 
-        function Nav(){
-          function navBtn(key, label){
-            const active = tab===key;
-            return e("button",{
-              type:"button",
-              onClick:()=>setTab(key),
-              className:
-                "btn " + (active ? "btn-primary" : "btn-secondary") + " text-sm md:text-base"
-            }, label);
-          }
+        function go(key){
+          setTab(key);
+          setMenuOpen(false);
+          window.scrollTo({top:0, behavior:"smooth"});
+        }
 
-          return e("div",{className:"no-print flex flex-wrap items-center justify-between gap-4"},[
-            e("div",{className:"space-y-1"},[
-              e("div",{className:"text-xs font-bold tracking-[0.28em] uppercase muted"}, "Wedding Website"),
-              e("div",{className:"text-lg md:text-xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, WEDDING.couple)
-            ]),
-            e("div",{className:"flex flex-wrap gap-2"},[
-              navBtn("home","Home"),
-              navBtn("dashboard","RSVP Dashboard"),
-              navBtn("report","A4 Report")
+        function statusLabel(s){
+          return s==="attending" ? "Attending" : s==="not_attending" ? "Not Attending" : "Undecided";
+        }
+
+        function StatusPill({status}){
+          const base = "inline-flex items-center rounded-full px-3 py-1 text-xs font-bold";
+          const cls = status==="attending"
+            ? "bg-emerald-100 text-emerald-800"
+            : status==="not_attending"
+              ? "bg-rose-100 text-rose-800"
+              : "bg-slate-100 text-slate-700";
+          return e("span",{className:base+" "+cls}, statusLabel(status));
+        }
+
+        function MobileNav(){
+          return e("div",{className:"no-print sticky top-0 z-50 safe-top"},[
+            e("div",{className:"panel mx-3 mt-3 px-4 py-3"},[
+              e("div",{className:"flex items-center justify-between gap-3"},[
+                e("div",{className:"min-w-0"},[
+                  e("div",{className:"text-[11px] font-bold tracking-[0.35em] uppercase muted"}, "Wedding Website"),
+                  e("div",{className:"text-base font-extrabold truncate", style:{fontFamily:"Playfair Display, serif"}}, WEDDING.couple)
+                ]),
+                e("button",{
+                  type:"button",
+                  onClick:()=>setMenuOpen(!menuOpen),
+                  className:"btn btn-secondary px-4 py-2 text-sm"
+                }, menuOpen ? "Close" : "Menu")
+              ]),
+              menuOpen ? e("div",{className:"mt-3 hairline"}) : null,
+              menuOpen ? e("div",{className:"mt-3 grid grid-cols-1 gap-2"},[
+                e(Button,{variant:tab==="home"?"primary":"secondary", onClick:()=>go("home")}, "Home"),
+                e(Button,{variant:tab==="dashboard"?"primary":"secondary", onClick:()=>go("dashboard")}, "RSVP Dashboard"),
+                e(Button,{variant:tab==="report"?"primary":"secondary", onClick:()=>go("report")}, "A4 Report")
+              ]) : null
             ])
           ]);
         }
 
-        function Hero(){
-          const done = cd.diff===0;
-
-          return e("div",{className:"section"},[
-            e("div",{className:"text-center space-y-4"},[
-              e("div",{className:"text-xs font-bold tracking-[0.38em] uppercase muted"}, "Invitation"),
-              e("h1",{className:"text-5xl md:text-7xl font-extrabold leading-[0.95]", style:{fontFamily:"Playfair Display, serif"}}, "Woaud & Hamair"),
-              e("p",{className:"text-lg md:text-xl muted max-w-2xl mx-auto leading-relaxed"},
-                "With joyful hearts, we invite you to celebrate our wedding day."
-              )
+        function DesktopNav(){
+          return e("div",{className:"no-print hidden md:flex items-center justify-between gap-4"},[
+            e("div",{className:"space-y-1"},[
+              e("div",{className:"text-xs font-bold tracking-[0.35em] uppercase muted"}, "Wedding Website"),
+              e("div",{className:"text-xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, WEDDING.couple)
             ]),
-            e(Ornament),
-            e("div",{className:"grid md:grid-cols-3 gap-6 items-start text-center md:text-left"},[
-              e("div",{className:"space-y-1"},[
-                e("div",{className:"text-xs font-bold tracking-[0.3em] uppercase muted"}, "Date"),
-                e("div",{className:"text-3xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, WEDDING.dateLabel)
-              ]),
-              e("div",{className:"space-y-1"},[
-                e("div",{className:"text-xs font-bold tracking-[0.3em] uppercase muted"}, "Time"),
-                e("div",{className:"text-3xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, WEDDING.timeLabel)
-              ]),
-              e("div",{className:"space-y-1"},[
-                e("div",{className:"text-xs font-bold tracking-[0.3em] uppercase muted"}, "Location"),
-                e("div",{className:"text-2xl font-extrabold leading-snug", style:{fontFamily:"Playfair Display, serif"}}, WEDDING.location)
-              ])
-            ]),
-            e("div",{className:"mt-8 hairline"}),
-            e("div",{className:"mt-8 grid grid-cols-4 gap-3 md:gap-6 text-center"},[
-              tile("Days", cd.days),
-              tile("Hours", cd.hours),
-              tile("Minutes", cd.minutes),
-              tile("Seconds", cd.seconds)
-            ]),
-            e("div",{className:"mt-6 text-center"},[
-              e("p",{className:"muted"}, done ? "It’s wedding time 🎉" : "Countdown to our special evening"),
-              e("div",{className:"mt-4 flex flex-wrap gap-2 justify-center no-print"},[
-                e(Button,{variant:"primary", onClick:()=>setTab("dashboard")}, "RSVP Now"),
-                e(Button,{variant:"secondary", onClick:()=>setTab("report")}, "Printable A4 Report"),
-                e(Button,{variant:"secondary", onClick:()=>window.scrollTo({top:document.body.scrollHeight, behavior:"smooth"})}, "Contact")
-              ])
+            e("div",{className:"flex gap-2"},[
+              e(Button,{variant:tab==="home"?"primary":"secondary", onClick:()=>go("home")}, "Home"),
+              e(Button,{variant:tab==="dashboard"?"primary":"secondary", onClick:()=>go("dashboard")}, "Dashboard"),
+              e(Button,{variant:tab==="report"?"primary":"secondary", onClick:()=>go("report")}, "A4 Report")
             ])
           ]);
+        }
 
+        function CountdownGrid(){
           function tile(label, value){
-            return e("div",{className:"section"},[
-              e("div",{className:"text-4xl md:text-5xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, String(value)),
-              e("div",{className:"text-xs font-bold tracking-[0.3em] uppercase muted mt-1"}, label)
+            return e("div",{className:"text-center"},[
+              e("div",{className:"text-4xl sm:text-5xl font-extrabold leading-none", style:{fontFamily:"Playfair Display, serif"}}, String(value)),
+              e("div",{className:"text-[11px] font-bold tracking-[0.32em] uppercase muted mt-2"}, label)
             ]);
           }
+          return e("div",{className:"grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6"},[
+            tile("Days", cd.days),
+            tile("Hours", cd.hours),
+            tile("Minutes", cd.minutes),
+            tile("Seconds", cd.seconds)
+          ]);
         }
 
         function Home(){
           return e("div",{className:"space-y-10"},[
-            e(Hero),
-            e("div",{className:"section"},[
-              e("div",{className:"grid lg:grid-cols-3 gap-8 items-start"},[
-                e("div",{className:"lg:col-span-2 space-y-3"},[
-                  e("h2",{className:"text-3xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "A Note from Us"),
-                  e("p",{className:"muted text-lg leading-relaxed"},
-                    "Your presence will make our day even more memorable. Please confirm your attendance and leave a message for the bride."
-                  ),
-                  e("div",{className:"subhairline"}),
-                  e("p",{className:"text-sm muted leading-relaxed"},
-                    "This website is front-end only. RSVPs are stored locally on this device using IndexedDB."
-                  )
-                ]),
-                e("div",{className:"space-y-3"},[
-                  e("h3",{className:"text-2xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "Quick Snapshot"),
-                  e("div",{className:"grid grid-cols-2 gap-4"},[
-                    metric("Total RSVPs", stats.total),
-                    metric("Attendance Rate", stats.rate + "%"),
-                    metric("Attending", stats.attending),
-                    metric("Not Attending", stats.notAttending)
-                  ]),
-                  e("div",{className:"no-print"}, e(Button,{variant:"primary", onClick:()=>setTab("dashboard"), className:"w-full"}, "Open RSVP Dashboard"))
-                ])
+            e("div",{className:"text-center space-y-4"},[
+              e("div",{className:"text-[11px] font-bold tracking-[0.45em] uppercase muted"}, "Invitation"),
+              e("h1",{className:"text-5xl sm:text-6xl md:text-7xl font-extrabold leading-[0.95]", style:{fontFamily:"Playfair Display, serif"}}, "Woaud & Hamair"),
+              e("p",{className:"text-lg sm:text-xl muted max-w-2xl mx-auto leading-relaxed px-2"},
+                "With joyful hearts, we invite you to celebrate our wedding day."
+              )
+            ]),
+            e("div",{className:"hairline"}),
+
+            e("div",{className:"grid md:grid-cols-3 gap-6 text-center md:text-left"},[
+              info("Date", WEDDING.dateLabel),
+              info("Time", WEDDING.timeLabel),
+              info("Location", WEDDING.location)
+            ]),
+
+            e("div",{className:"panel p-5 sm:p-7 space-y-4"},[
+              e("div",{className:"text-center space-y-1"},[
+                e("div",{className:"text-[11px] font-bold tracking-[0.35em] uppercase muted"}, "Countdown"),
+                e("div",{className:"text-2xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "Until the Wedding")
+              ]),
+              e(CountdownGrid),
+              e("div",{className:"flex flex-col sm:flex-row gap-2 justify-center no-print"},[
+                e(Button,{variant:"primary", onClick:()=>go("dashboard"), className:"w-full sm:w-auto"}, "RSVP Now"),
+                e(Button,{variant:"secondary", onClick:()=>go("report"), className:"w-full sm:w-auto"}, "Printable A4 Report")
+              ])
+            ]),
+
+            /* Removed Quick Snapshot and added Song Request panel */
+            e("div",{className:"grid lg:grid-cols-3 gap-6"},[
+              e("div",{className:"panel p-5 sm:p-7 space-y-3 lg:col-span-2"},[
+                e("h2",{className:"text-3xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "A Note from Us"),
+                e("p",{className:"muted text-lg leading-relaxed"},
+                  "Your presence will make our day even more memorable. Please confirm your attendance and leave a message for the bride."
+                ),
+                e("p",{className:"text-sm muted leading-relaxed"},
+                  "This website is front-end only. RSVPs are stored locally on your device (IndexedDB)."
+                )
+              ]),
+              e("div",{className:"panel p-5 sm:p-7 space-y-4"},[
+                e("h3",{className:"text-2xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "Song Request"),
+                e("p",{className:"muted text-sm leading-relaxed"},
+                  "Tell us the song you would love to dance to during the wedding."
+                ),
+                e(Field,{label:"Your Name"}, e("input",{
+                  className:"ui-input",
+                  placeholder:"Name",
+                  value: form.name,
+                  onChange:(ev)=>setForm(Object.assign({}, form, {name: ev.target.value}))
+                })),
+                e(Field,{label:"Song Title + Artist"}, e("input",{
+                  className:"ui-input",
+                  placeholder:"Example: Perfect — Ed Sheeran",
+                  value: form.song,
+                  onChange:(ev)=>setForm(Object.assign({}, form, {song: ev.target.value}))
+                })),
+                e(Button,{variant:"primary", onClick:()=>go("dashboard"), className:"w-full no-print"}, "Submit RSVP + Song")
               ])
             ])
           ]);
 
-          function metric(label, value){
-            return e("div",{className:"section"},[
-              e("div",{className:"text-xs font-bold tracking-[0.28em] uppercase muted"}, label),
-              e("div",{className:"text-3xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, String(value))
+          function info(label, value){
+            return e("div",{className:"space-y-1"},[
+              e("div",{className:"text-[11px] font-bold tracking-[0.35em] uppercase muted"}, label),
+              e("div",{className:"text-2xl sm:text-3xl font-extrabold leading-snug", style:{fontFamily:"Playfair Display, serif"}}, value)
             ]);
           }
         }
 
         function Dashboard(){
-          return e("div",{className:"space-y-10 section"},[
+          return e("div",{className:"space-y-8"},[
             e("div",{className:"text-center space-y-2"},[
               e("h2",{className:"text-4xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "RSVP Dashboard"),
-              e("p",{className:"muted text-lg"}, "Confirm attendance, write a message, and manage RSVPs.")
+              e("p",{className:"muted text-lg px-2"}, "Confirm attendance, write a message, and add a song request.")
             ]),
-            e(Ornament),
 
-            e("div",{className:"grid lg:grid-cols-3 gap-8 items-start"},[
-              e("div",{className:"lg:col-span-2 panel p-6 md:p-8 space-y-5"},[
-                e("div",{className:"space-y-2"},[
-                  e("h3",{className:"text-2xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, form.id ? "Edit Your RSVP" : "Send Your RSVP"),
-                  e("div",{className:"hairline"})
-                ]),
+            e("div",{className:"grid lg:grid-cols-3 gap-6 items-start"},[
+              e("div",{className:"lg:col-span-2 panel p-5 sm:p-7 space-y-5"},[
+                e("h3",{className:"text-2xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, form.id ? "Edit Your RSVP" : "Send Your RSVP"),
+                e("div",{className:"hairline"}),
+
                 e("form",{onSubmit:save, className:"space-y-5"},[
-                  e("div",{className:"grid md:grid-cols-2 gap-4"},[
+                  e("div",{className:"grid sm:grid-cols-2 gap-4"},[
                     e(Field,{label:"Name *"}, e("input",{
                       className:"ui-input",
                       value: form.name,
@@ -676,7 +638,7 @@
                       onChange:(ev)=>setForm(Object.assign({}, form, {phone: ev.target.value}))
                     }))
                   ]),
-                  e("div",{className:"grid md:grid-cols-2 gap-4"},[
+                  e("div",{className:"grid sm:grid-cols-2 gap-4"},[
                     e(Field,{label:"Attendance"}, e("select",{
                       className:"ui-select",
                       value: form.status,
@@ -686,12 +648,12 @@
                       e("option",{value:"not_attending"},"Not Attending"),
                       e("option",{value:"unknown"},"Undecided")
                     ])),
-                    e("div",{className:"space-y-1"},[
-                      e("div",{className:"text-sm font-bold"}, "Privacy"),
-                      e("p",{className:"text-sm muted leading-relaxed"},
-                        "Your RSVP is saved only on this device. No server is used."
-                      )
-                    ])
+                    e(Field,{label:"Song Request (optional)"}, e("input",{
+                      className:"ui-input",
+                      value: form.song,
+                      placeholder:"Song title — Artist",
+                      onChange:(ev)=>setForm(Object.assign({}, form, {song: ev.target.value}))
+                    }))
                   ]),
                   e(Field,{label:"Message to the Bride"}, e("textarea",{
                     className:"ui-textarea",
@@ -700,64 +662,64 @@
                     placeholder:"Write something sweet…",
                     onChange:(ev)=>setForm(Object.assign({}, form, {message: ev.target.value}))
                   })),
-                  e("div",{className:"flex flex-wrap gap-2 no-print"},[
-                    e(Button,{type:"submit", variant:"primary"}, form.id ? "Save Changes" : "Submit RSVP"),
-                    form.id ? e(Button,{type:"button", variant:"secondary", onClick:()=>setForm({id:null,name:"",phone:"",status:"attending",message:""})}, "Cancel Edit") : null
+
+                  e("div",{className:"flex flex-col sm:flex-row gap-2 no-print"},[
+                    e(Button,{type:"submit", variant:"primary", className:"w-full sm:w-auto"}, form.id ? "Save Changes" : "Submit RSVP"),
+                    form.id ? e(Button,{type:"button", variant:"secondary", onClick:()=>setForm({id:null,name:"",phone:"",status:"attending",message:"",song:""}), className:"w-full sm:w-auto"}, "Cancel Edit") : null
                   ])
                 ])
               ]),
 
-              e("div",{className:"panel p-6 md:p-8 space-y-6"},[
-                e("div",{className:"space-y-2"},[
-                  e("h3",{className:"text-2xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "Insights"),
-                  e("div",{className:"hairline"})
+              e("div",{className:"panel p-5 sm:p-7 space-y-5"},[
+                e("h3",{className:"text-2xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "Insights"),
+                e("div",{className:"hairline"}),
+
+                e("div",{className:"grid grid-cols-2 gap-4"},[
+                  kpi("Total", stats.total),
+                  kpi("Rate", stats.rate + "%"),
+                  kpi("Attending", stats.attending),
+                  kpi("Not Attending", stats.notAttending)
                 ]),
-                kpi("Total RSVPs", stats.total),
-                kpi("Attending", stats.attending),
-                kpi("Not Attending", stats.notAttending),
-                kpi("Undecided", stats.unknown),
-                e("div",{className:"subhairline"}),
+                e("div",{className:"hairline"}),
                 e("div",{className:"space-y-2"},[
-                  e("div",{className:"text-sm font-bold"}, "RSVP Chart"),
+                  e("div",{className:"text-sm font-bold"}, "Chart"),
                   e(RSVPChart,{stats})
                 ])
               ])
             ]),
 
-            e("div",{className:"panel p-6 md:p-8 space-y-5"},[
-              e("div",{className:"flex flex-wrap items-end justify-between gap-4 no-print"},[
-                e("div",{className:"grid md:grid-cols-3 gap-3 flex-1"},[
-                  e(Field,{label:"Search"}, e("input",{
-                    className:"ui-input",
-                    value:q,
-                    placeholder:"Search name, phone, or message",
-                    onChange:(ev)=>setQ(ev.target.value)
-                  })),
-                  e(Field,{label:"Filter"}, e("select",{
-                    className:"ui-select",
-                    value: statusFilter,
-                    onChange:(ev)=>setStatusFilter(ev.target.value)
-                  },[
-                    e("option",{value:"all"},"All"),
-                    e("option",{value:"attending"},"Attending"),
-                    e("option",{value:"not_attending"},"Not Attending"),
-                    e("option",{value:"unknown"},"Undecided")
-                  ])),
-                  e("div",{className:"space-y-1"},[
-                    e("div",{className:"text-sm font-bold"}, "Tools"),
-                    e("div",{className:"flex flex-wrap gap-2"},[
-                      e(Button,{variant:"secondary", onClick:()=>exportToExcel(filtered)}, "Export Excel (shown)"),
-                      e(Button,{variant:"secondary", onClick:exportJSON}, "Export JSON"),
-                      e("input",{
-                        ref: importRef,
-                        type:"file",
-                        accept:"application/json",
-                        className:"hidden",
-                        onChange:(ev)=>{ const f = ev.target.files && ev.target.files[0]; if(f) importJSON(f); }
-                      }),
-                      e(Button,{variant:"secondary", onClick:()=>importRef.current && importRef.current.click()}, "Import JSON"),
-                      e(Button,{variant:"danger", onClick:clearAll}, "Delete All")
-                    ])
+            e("div",{className:"panel p-5 sm:p-7 space-y-5"},[
+              e("div",{className:"grid md:grid-cols-3 gap-3 no-print"},[
+                e(Field,{label:"Search"}, e("input",{
+                  className:"ui-input",
+                  value:q,
+                  placeholder:"Search name, phone, message, or song",
+                  onChange:(ev)=>setQ(ev.target.value)
+                })),
+                e(Field,{label:"Filter"}, e("select",{
+                  className:"ui-select",
+                  value: statusFilter,
+                  onChange:(ev)=>setStatusFilter(ev.target.value)
+                },[
+                  e("option",{value:"all"},"All"),
+                  e("option",{value:"attending"},"Attending"),
+                  e("option",{value:"not_attending"},"Not Attending"),
+                  e("option",{value:"unknown"},"Undecided")
+                ])),
+                e("div",{className:"space-y-1"},[
+                  e("div",{className:"text-sm font-bold"}, "Tools"),
+                  e("div",{className:"flex flex-wrap gap-2"},[
+                    e(Button,{variant:"secondary", onClick:()=>exportToExcel(filtered)}, "Export Excel"),
+                    e(Button,{variant:"secondary", onClick:exportJSON}, "Export JSON"),
+                    e("input",{
+                      ref: importRef,
+                      type:"file",
+                      accept:"application/json",
+                      className:"hidden",
+                      onChange:(ev)=>{ const f = ev.target.files && ev.target.files[0]; if(f) importJSON(f); }
+                    }),
+                    e(Button,{variant:"secondary", onClick:()=>importRef.current && importRef.current.click()}, "Import JSON"),
+                    e(Button,{variant:"danger", onClick:clearAll}, "Delete All")
                   ])
                 ])
               ]),
@@ -766,33 +728,55 @@
                 ? e("p",{className:"muted"}, "Loading…")
                 : filtered.length===0
                   ? e("p",{className:"muted"}, "No results.")
-                  : e("div",{className:"overflow-x-auto"},[
-                      e("table",{className:"min-w-full text-sm"},[
-                        e("thead",null,
-                          e("tr",{className:"text-left"},[
-                            th("Name"),
-                            th("Phone"),
-                            th("Status"),
-                            th("Message"),
-                            e("th",{className:"py-3 pr-4 font-extrabold no-print"}, "Actions")
+                  : e("div",{className:"space-y-3"},[
+                      e("div",{className:"grid gap-3 md:hidden"},[
+                        ...filtered.map(row =>
+                          e("div",{key:row.id, className:"panel p-4"},[
+                            e("div",{className:"flex items-start justify-between gap-3"},[
+                              e("div",{className:"min-w-0"},[
+                                e("div",{className:"text-lg font-extrabold leading-tight", style:{fontFamily:"Playfair Display, serif"}}, row.name),
+                                e("div",{className:"text-sm muted mt-1"}, row.phone ? ("Phone: " + row.phone) : "Phone: —")
+                              ]),
+                              e(StatusPill,{status:row.status})
+                            ]),
+                            row.song ? e("div",{className:"mt-3 text-sm"}, [
+                              e("span",{className:"font-bold"}, "Song: "),
+                              e("span",null,row.song)
+                            ]) : null,
+                            row.message ? e("p",{className:"mt-2 text-sm leading-relaxed"}, row.message) : e("p",{className:"mt-2 text-sm muted"}, "No message."),
+                            e("div",{className:"mt-3 flex gap-2 no-print"},[
+                              e(Button,{variant:"secondary", onClick:()=>edit(row), className:"flex-1"}, "Edit"),
+                              e(Button,{variant:"danger", onClick:()=>remove(row.id), className:"flex-1"}, "Delete")
+                            ])
                           ])
-                        ),
-                        e("tbody",null,
-                          filtered.map(row =>
-                            e("tr",{key:row.id, className:"border-t border-[rgba(255,61,135,0.18)] align-top"},[
-                              tdStrong(row.name),
-                              td(row.phone || "—"),
-                              td(row.status==="attending" ? "Attending" : row.status==="not_attending" ? "Not Attending" : "Undecided"),
-                              e("td",{className:"py-3 pr-4 leading-relaxed max-w-[36rem]"}, row.message || "—"),
-                              e("td",{className:"py-3 pr-4 no-print"},[
-                                e("div",{className:"flex gap-2 flex-wrap"},[
-                                  e(Button,{variant:"secondary", onClick:()=>edit(row)}, "Edit"),
-                                  e(Button,{variant:"danger", onClick:()=>remove(row.id)}, "Delete")
+                        )
+                      ]),
+                      e("div",{className:"hidden md:block overflow-x-auto"},[
+                        e("table",{className:"min-w-full text-sm"},[
+                          e("thead",null,
+                            e("tr",{className:"text-left"},[
+                              th("Name"), th("Phone"), th("Status"), th("Message"), th("Song"),
+                              e("th",{className:"py-3 pr-4 font-extrabold no-print"}, "Actions")
+                            ])
+                          ),
+                          e("tbody",null,
+                            filtered.map(row =>
+                              e("tr",{key:row.id, className:"border-t border-[rgba(255,61,135,0.18)] align-top"},[
+                                e("td",{className:"py-3 pr-4 font-bold"}, row.name),
+                                e("td",{className:"py-3 pr-4"}, row.phone || "—"),
+                                e("td",{className:"py-3 pr-4"}, statusLabel(row.status)),
+                                e("td",{className:"py-3 pr-4 leading-relaxed max-w-[28rem]"}, row.message || "—"),
+                                e("td",{className:"py-3 pr-4"}, row.song || "—"),
+                                e("td",{className:"py-3 pr-4 no-print"},[
+                                  e("div",{className:"flex gap-2 flex-wrap"},[
+                                    e(Button,{variant:"secondary", onClick:()=>edit(row)}, "Edit"),
+                                    e(Button,{variant:"danger", onClick:()=>remove(row.id)}, "Delete")
+                                  ])
                                 ])
                               ])
-                            ])
+                            )
                           )
-                        )
+                        ])
                       ])
                     ])
             ])
@@ -800,27 +784,25 @@
 
           function kpi(label, value){
             return e("div",{className:"space-y-1"},[
-              e("div",{className:"text-xs font-bold tracking-[0.28em] uppercase muted"}, label),
-              e("div",{className:"text-3xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, String(value))
+              e("div",{className:"text-[11px] font-bold tracking-[0.3em] uppercase muted"}, label),
+              e("div",{className:"text-3xl font-extrabold leading-none", style:{fontFamily:"Playfair Display, serif"}}, String(value))
             ]);
           }
           function th(txt){ return e("th",{className:"py-3 pr-4 font-extrabold"}, txt); }
-          function td(txt){ return e("td",{className:"py-3 pr-4"}, txt); }
-          function tdStrong(txt){ return e("td",{className:"py-3 pr-4 font-bold"}, txt); }
         }
 
         function Report(){
           const reportDate = new Date().toLocaleString();
           const rows = items.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
 
-          return e("div",{className:"print-page section space-y-6"},[
+          return e("div",{className:"print-page space-y-6"},[
             e("div",{className:"no-print flex flex-wrap items-center justify-between gap-4"},[
               e("div",{className:"space-y-1"},[
                 e("h2",{className:"text-3xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "Printable A4 Report"),
                 e("p",{className:"muted"}, "Use your browser print dialog to print or save as PDF.")
               ]),
               e("div",{className:"flex gap-2"},[
-                e(Button,{variant:"secondary", onClick:()=>setTab("dashboard")}, "Back"),
+                e(Button,{variant:"secondary", onClick:()=>go("dashboard")}, "Back"),
                 e(Button,{variant:"primary", onClick:()=>window.print()}, "Print")
               ])
             ]),
@@ -833,25 +815,25 @@
               e("div",{className:"text-xs muted"}, "Generated: " + reportDate)
             ]),
 
-            e("div",{className:"grid grid-cols-2 md:grid-cols-5 gap-4 pt-2"},[
-              metric("Total", stats.total),
-              metric("Attending", stats.attending),
-              metric("Not Attending", stats.notAttending),
-              metric("Undecided", stats.unknown),
-              metric("Rate", stats.rate + "%")
+            e("div",{className:"panel p-5 space-y-3"},[
+              e("div",{className:"grid grid-cols-2 md:grid-cols-5 gap-4"},[
+                metric("Total", stats.total),
+                metric("Attending", stats.attending),
+                metric("Not Attending", stats.notAttending),
+                metric("Undecided", stats.unknown),
+                metric("Rate", stats.rate + "%")
+              ])
             ]),
 
-            e("div",{className:"subhairline"}),
-
-            e("h3",{className:"text-xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "RSVP Details"),
-            e("div",{className:"overflow-x-auto"},[
+            e("div",{className:"panel p-5 overflow-x-auto"},[
               e("table",{className:"min-w-full text-sm"},[
                 e("thead",null,
                   e("tr",{className:"text-left"},[
                     e("th",{className:"py-2 pr-4 font-extrabold"},"Name"),
                     e("th",{className:"py-2 pr-4 font-extrabold"},"Phone"),
                     e("th",{className:"py-2 pr-4 font-extrabold"},"Status"),
-                    e("th",{className:"py-2 pr-4 font-extrabold"},"Message")
+                    e("th",{className:"py-2 pr-4 font-extrabold"},"Message"),
+                    e("th",{className:"py-2 pr-4 font-extrabold"},"Song")
                   ])
                 ),
                 e("tbody",null,
@@ -859,16 +841,17 @@
                     e("tr",{key:row.id, className:"border-t border-[rgba(255,61,135,0.18)] align-top"},[
                       e("td",{className:"py-3 pr-4 font-bold"}, row.name),
                       e("td",{className:"py-3 pr-4"}, row.phone || "—"),
-                      e("td",{className:"py-3 pr-4"}, row.status==="attending" ? "Attending" : row.status==="not_attending" ? "Not Attending" : "Undecided"),
-                      e("td",{className:"py-3 pr-4 leading-relaxed"}, row.message || "—")
+                      e("td",{className:"py-3 pr-4"}, statusLabel(row.status)),
+                      e("td",{className:"py-3 pr-4 leading-relaxed"}, row.message || "—"),
+                      e("td",{className:"py-3 pr-4"}, row.song || "—")
                     ])
                   )
                 )
               ])
             ]),
 
-            e("div",{className:"pt-4 text-sm"},[
-              e("div",{className:"font-extrabold"}, "Contact"),
+            e("div",{className:"panel p-5 text-sm"},[
+              e("div",{className:"font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, "Contact"),
               e("div",{className:"muted"}, "Phone: " + WEDDING.phone),
               e("div",{className:"muted"}, "Email: " + WEDDING.email)
             ])
@@ -876,26 +859,29 @@
 
           function metric(label, value){
             return e("div",{className:"space-y-1"},[
-              e("div",{className:"text-xs font-bold tracking-[0.28em] uppercase muted"}, label),
-              e("div",{className:"text-3xl font-extrabold", style:{fontFamily:"Playfair Display, serif"}}, String(value))
+              e("div",{className:"text-[11px] font-bold tracking-[0.3em] uppercase muted"}, label),
+              e("div",{className:"text-3xl font-extrabold leading-none", style:{fontFamily:"Playfair Display, serif"}}, String(value))
             ]);
           }
         }
 
-        return e("div",{className:"min-h-screen"},[
-          e("div",{className:"max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-14"},[
-            e(Nav),
-            e("main",{className:"mt-8"}, tab==="home" ? e(Home) : tab==="dashboard" ? e(Dashboard) : e(Report)),
-            e("footer",{className:"mt-14 section space-y-4"},[
+        return e("div",{className:"min-h-screen safe-bottom"},[
+          e(MobileNav),
+          e("div",{className:"max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-14"},[
+            e(DesktopNav),
+            e("main",{className:"mt-6 sm:mt-8"}, tab==="home" ? e(Home) : tab==="dashboard" ? e(Dashboard) : e(Report)),
+            e("footer",{className:"mt-14 space-y-4"},[
               e("div",{className:"hairline"}),
-              e("div",{className:"grid md:grid-cols-3 gap-6 text-sm"},[
-                footBlock("Details", ["Date: " + WEDDING.dateLabel, "Time: " + WEDDING.timeLabel]),
-                footBlock("Location", [WEDDING.location]),
-                footBlock("Contact", ["Phone: " + WEDDING.phone, "Email: " + WEDDING.email])
-              ]),
-              e("div",{className:"text-xs muted"},
-                "Front-end only • Data stored locally using IndexedDB • Export via Excel/JSON • © 2026"
-              )
+              e("div",{className:"panel p-5 sm:p-7"},[
+                e("div",{className:"grid md:grid-cols-3 gap-6 text-sm"},[
+                  footBlock("Details", ["Date: " + WEDDING.dateLabel, "Time: " + WEDDING.timeLabel]),
+                  footBlock("Location", [WEDDING.location]),
+                  footBlock("Contact", ["Phone: " + WEDDING.phone, "Email: " + WEDDING.email])
+                ]),
+                e("div",{className:"mt-4 text-xs muted"},
+                  "Front-end only • Data stored locally using IndexedDB • Export via Excel/JSON • © 2026"
+                )
+              ])
             ])
           ])
         ]);
@@ -913,4 +899,6 @@
     })();
   </script>
 </body>
+</html>
+
 </html>
