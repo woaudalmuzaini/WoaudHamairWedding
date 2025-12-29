@@ -118,7 +118,10 @@
       overflow:hidden;
       position:relative;
     }
+    /* ✅ FIX: keep content above the decoration */
     .hero-inner{
+      position:relative;
+      z-index:2;
       display:grid;
       grid-template-columns: 1.25fr 0.75fr;
       gap: 18px;
@@ -312,6 +315,11 @@
       background: rgba(255,255,255,0.78);
       border:1px solid rgba(255,61,135,0.18);
     }
+    .danger{
+      color:#fff;
+      background: linear-gradient(180deg, #e11d48, #fb7185);
+      box-shadow: 0 14px 28px rgba(225,29,72,0.18);
+    }
 
     .toast{
       display:none;
@@ -364,26 +372,82 @@
     }
 
     footer{
-      margin-top: 18px;
+      margin-top: 14px;
       padding-bottom: env(safe-area-inset-bottom);
       text-align:center;
       color: var(--muted);
       font-size: 13px;
     }
 
-    /* Floral illustration anchored bottom-right like the card */
+    /* ✅ FIX: decoration behind content + moved more to the right */
     .floral{
       position:absolute;
-      right:-10px;
-      bottom:-8px;
+      right:-70px;
+      bottom:-12px;
       width:min(520px, 92vw);
-      opacity:0.92;
+      opacity:0.88;
       pointer-events:none;
+      z-index:1; /* behind content */
       transform: rotate(-0.4deg);
       filter: drop-shadow(0 18px 28px rgba(42,31,41,0.08));
     }
 
-    /* print */
+    /* Modal (Admin) */
+    .modal-backdrop{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      padding: 18px;
+      background: rgba(42,31,41,0.34);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .modal-backdrop.show{ display:flex; }
+    .modal{
+      width: min(980px, 100%);
+      max-height: min(86vh, 720px);
+      overflow:auto;
+      padding: 18px;
+    }
+    .modal-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+    .modal-title{
+      font-family:"Playfair Display","Cormorant Garamond",serif;
+      font-weight: 900;
+      font-size: 22px;
+      margin:0;
+    }
+    .admin-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 900px){
+      .admin-grid{ grid-template-columns: 1fr; }
+    }
+    .admin-item{
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.60);
+      border: 1px solid rgba(255,61,135,0.10);
+      display:grid;
+      gap: 8px;
+    }
+    .admin-actions{
+      display:flex;
+      gap: 8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
     @media print{
       .no-print{ display:none !important; }
       body{ background:#fff !important; }
@@ -446,7 +510,7 @@
         </aside>
       </div>
 
-      <!-- floral / candles inspired by your invitation card -->
+      <!-- floral / candles -->
       <svg class="floral" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <linearGradient id="cloth" x1="0" x2="1">
@@ -471,12 +535,12 @@
         <path d="M110,350 C220,260 360,280 470,320 C590,365 710,350 820,300 L900,420 L0,420 L0,330 C30,330 70,340 110,350Z"
               fill="url(#cloth)" opacity="0.95"/>
 
-        <!-- candles -->
+        <!-- ✅ candles (moved more to the right) -->
         <g opacity="0.92">
-          <rect x="610" y="120" width="22" height="190" rx="10" fill="#f7efe9" stroke="rgba(42,31,41,0.10)"/>
-          <rect x="662" y="90" width="28" height="220" rx="12" fill="#f7efe9" stroke="rgba(42,31,41,0.10)"/>
-          <path d="M621 110 C626 96 636 96 641 110 C636 122 626 122 621 110Z" fill="#ffd6a6"/>
-          <path d="M675 78 C681 60 693 60 699 78 C693 96 681 96 675 78Z" fill="#ffd6a6"/>
+          <rect x="740" y="120" width="22" height="190" rx="10" fill="#f7efe9" stroke="rgba(42,31,41,0.10)"/>
+          <rect x="792" y="90" width="28" height="220" rx="12" fill="#f7efe9" stroke="rgba(42,31,41,0.10)"/>
+          <path d="M751 110 C756 96 766 96 771 110 C766 122 756 122 751 110Z" fill="#ffd6a6"/>
+          <path d="M805 78 C811 60 823 60 829 78 C823 96 811 96 805 78Z" fill="#ffd6a6"/>
         </g>
 
         <!-- greenery base -->
@@ -545,7 +609,7 @@
 
           <div class="btns">
             <button class="primary" type="submit">Send Song</button>
-            <button class="secondary" type="button" id="exportBtn">Export My Submissions</button>
+            <button class="secondary" type="button" id="exportBtn">Export My Songs (JSON)</button>
           </div>
 
           <div class="toast" id="songToast">Thank you 💗 Your song suggestion has been saved.</div>
@@ -577,7 +641,7 @@
 
           <div class="btns">
             <button class="primary" type="submit">Send Message</button>
-            <button class="secondary" type="button" id="exportBtn2">Export My Submissions</button>
+            <button class="secondary" type="button" id="exportBtn2">Export My Messages (JSON)</button>
           </div>
 
           <div class="toast" id="msgToast">Thank you 💗 Your message has been saved.</div>
@@ -590,14 +654,90 @@
     <footer class="card" style="padding:14px 16px; margin-top:14px;">
       <div style="font-weight:900; font-family:'Playfair Display',serif;">Woaud &amp; Hamair</div>
       <div>15 January 2026 • Al Numan Palace Hall</div>
-      <div style="opacity:0.95; margin-top:6px;">
-        This website saves submissions on the guest’s device (privacy-friendly). You can export them anytime.
+
+      <div class="btns no-print" style="justify-content:center; margin-top:10px;">
+        <button class="secondary" type="button" id="adminOpenBtn">Admin Panel</button>
+      </div>
+
+      <div style="opacity:0.95; margin-top:8px;">
+        This website saves submissions on the guest’s device (privacy-friendly). Admin panel manages only this browser’s saved submissions.
       </div>
     </footer>
   </main>
 
+  <!-- Admin Modal -->
+  <div class="modal-backdrop no-print" id="adminModal" aria-hidden="true">
+    <div class="card modal" role="dialog" aria-modal="true" aria-label="Admin Panel">
+      <div class="modal-top">
+        <h3 class="modal-title">Admin Panel</h3>
+        <div class="btns" style="margin:0;">
+          <button class="secondary" type="button" id="adminCloseBtn">Close</button>
+        </div>
+      </div>
+
+      <!-- Login -->
+      <div class="card" style="padding:14px; background: rgba(255,255,255,0.60); border:1px solid rgba(255,61,135,0.12);">
+        <div class="row">
+          <div>
+            <label for="adminPin">PIN</label>
+            <input id="adminPin" type="password" inputmode="numeric" placeholder="Enter PIN" />
+          </div>
+          <div style="display:flex; align-items:flex-end; gap:10px;">
+            <button class="primary" type="button" id="adminLoginBtn" style="width:100%;">Unlock</button>
+          </div>
+        </div>
+        <div class="toast" id="adminToast">Unlocked ✅</div>
+        <div class="toast" id="adminToastErr" style="border-color: rgba(225,29,72,0.25);">Wrong PIN.</div>
+      </div>
+
+      <!-- Admin content -->
+      <div id="adminContent" style="display:none;">
+        <div class="admin-grid">
+          <div class="card" style="padding:14px; background: rgba(255,255,255,0.60); border:1px solid rgba(255,61,135,0.12);">
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
+              <div>
+                <div class="kicker">Manage</div>
+                <div class="modal-title" style="font-size:18px;">Songs</div>
+              </div>
+              <div class="meta" id="songCount">0</div>
+            </div>
+            <div class="divider" style="margin:12px 0;"></div>
+            <div id="adminSongs"></div>
+          </div>
+
+          <div class="card" style="padding:14px; background: rgba(255,255,255,0.60); border:1px solid rgba(255,61,135,0.12);">
+            <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
+              <div>
+                <div class="kicker">Manage</div>
+                <div class="modal-title" style="font-size:18px;">Messages</div>
+              </div>
+              <div class="meta" id="msgCount">0</div>
+            </div>
+            <div class="divider" style="margin:12px 0;"></div>
+            <div id="adminMsgs"></div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="btns" style="justify-content:space-between;">
+          <div class="btns" style="margin:0;">
+            <button class="secondary" type="button" id="adminExportAll">Export All (JSON)</button>
+          </div>
+          <div class="btns" style="margin:0;">
+            <button class="danger" type="button" id="adminClearAll">Delete ALL (This Device)</button>
+          </div>
+        </div>
+
+        <div class="toast" id="adminActionToast">Done ✅</div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    // --- Settings (edit these if you want) ---
+    // ===============================
+    // Settings
+    // ===============================
     const WEDDING = {
       names: "Woaud & Hamair",
       // Wedding date: 15 January 2026 at 8:00 PM Oman time (UTC+4)
@@ -605,15 +745,14 @@
       location: "Al Numan Palace Hall"
     };
 
-    // --- Countdown ---
-    const $ = (id)=>document.getElementById(id);
-    const cd = {
-      d: $("cd-days"),
-      h: $("cd-hours"),
-      m: $("cd-mins"),
-      s: $("cd-secs")
-    };
+    // ✅ Change this PIN to anything you like (numbers recommended)
+    const ADMIN_PIN = "2468";
 
+    // ===============================
+    // Countdown
+    // ===============================
+    const $ = (id)=>document.getElementById(id);
+    const cd = { d: $("cd-days"), h: $("cd-hours"), m: $("cd-mins"), s: $("cd-secs") };
     function pad2(n){ return String(n).padStart(2,"0"); }
 
     function tick(){
@@ -635,7 +774,9 @@
     tick();
     setInterval(tick, 1000);
 
-    // --- Local storage keys ---
+    // ===============================
+    // Storage
+    // ===============================
     const KEY_SONGS = "whw_songs_v1";
     const KEY_MSGS  = "whw_msgs_v1";
 
@@ -647,10 +788,30 @@
       localStorage.setItem(key, JSON.stringify(arr));
     }
 
-    // --- Render recent cards (this device) ---
+    // ===============================
+    // UI helpers
+    // ===============================
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, s => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      })[s]);
+    }
+
+    function showToast(el){
+      el.classList.add("show");
+      setTimeout(()=>el.classList.remove("show"), 2600);
+    }
+
+    // ===============================
+    // Recent cards (public view)
+    // ===============================
+    const songRecent = $("songRecent");
+    const msgRecent  = $("msgRecent");
+
     function renderRecent(container, items, type){
       container.innerHTML = "";
       const recent = items.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,3);
+
       if(recent.length === 0){
         const empty = document.createElement("div");
         empty.className = "item";
@@ -662,7 +823,6 @@
       for(const r of recent){
         const el = document.createElement("div");
         el.className = "item";
-
         const when = new Date(r.createdAt).toLocaleString([], {year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit"});
         const title = (r.name || "Guest").trim();
 
@@ -671,7 +831,8 @@
           body = `<p><b>Song:</b> ${escapeHtml(r.song || "—")}</p>`;
         }else{
           const rel = r.relation ? ` • ${escapeHtml(r.relation)}` : "";
-          body = `<p>${escapeHtml(r.message || "—")}</p><p style="margin-top:8px; font-size:12px; letter-spacing:0.12em; text-transform:uppercase;">${escapeHtml(title)}${rel}</p>`;
+          body = `<p>${escapeHtml(r.message || "—")}</p>
+                  <p style="margin-top:8px; font-size:12px; letter-spacing:0.12em; text-transform:uppercase;">${escapeHtml(title)}${rel}</p>`;
         }
 
         el.innerHTML = `
@@ -685,30 +846,19 @@
       }
     }
 
-    function escapeHtml(str){
-      return String(str).replace(/[&<>"']/g, s => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      })[s]);
-    }
-
-    const songRecent = $("songRecent");
-    const msgRecent  = $("msgRecent");
-    function refresh(){
+    function refreshPublic(){
       renderRecent(songRecent, load(KEY_SONGS), "song");
       renderRecent(msgRecent,  load(KEY_MSGS),  "msg");
     }
-    refresh();
+    refreshPublic();
 
-    // --- Toast helper ---
-    function showToast(el){
-      el.classList.add("show");
-      setTimeout(()=>el.classList.remove("show"), 2600);
-    }
-
-    // --- Song form ---
+    // ===============================
+    // Forms (public submission)
+    // ===============================
     $("songForm").addEventListener("submit", (ev)=>{
       ev.preventDefault();
       const fd = new FormData(ev.target);
+
       const name = (fd.get("name") || "").toString().trim();
       const phone = (fd.get("phone") || "").toString().trim();
       const song = (fd.get("song") || "").toString().trim();
@@ -726,13 +876,14 @@
 
       ev.target.reset();
       showToast($("songToast"));
-      refresh();
+      refreshPublic();
+      if(adminUnlocked) refreshAdmin(); // keep admin in sync if open
     });
 
-    // --- Message form ---
     $("msgForm").addEventListener("submit", (ev)=>{
       ev.preventDefault();
       const fd = new FormData(ev.target);
+
       const name = (fd.get("name") || "").toString().trim();
       const relation = (fd.get("relation") || "").toString().trim();
       const message = (fd.get("message") || "").toString().trim();
@@ -750,10 +901,13 @@
 
       ev.target.reset();
       showToast($("msgToast"));
-      refresh();
+      refreshPublic();
+      if(adminUnlocked) refreshAdmin();
     });
 
-    // --- Export buttons (downloads JSON) ---
+    // ===============================
+    // Export (public)
+    // ===============================
     function downloadJSON(filename, payload){
       const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
       const url = URL.createObjectURL(blob);
@@ -780,6 +934,202 @@
         wedding: WEDDING,
         messages: load(KEY_MSGS)
       });
+    });
+
+    // ===============================
+    // Admin Panel (delete specific responses)
+    // NOTE: Admin can only manage responses saved in THIS browser/device.
+    // ===============================
+    const adminModal = $("adminModal");
+    const adminOpenBtn = $("adminOpenBtn");
+    const adminCloseBtn = $("adminCloseBtn");
+    const adminPin = $("adminPin");
+    const adminLoginBtn = $("adminLoginBtn");
+    const adminContent = $("adminContent");
+    const adminToast = $("adminToast");
+    const adminToastErr = $("adminToastErr");
+    const adminActionToast = $("adminActionToast");
+
+    const adminSongs = $("adminSongs");
+    const adminMsgs = $("adminMsgs");
+    const songCount = $("songCount");
+    const msgCount = $("msgCount");
+
+    const adminExportAll = $("adminExportAll");
+    const adminClearAll = $("adminClearAll");
+
+    let adminUnlocked = false;
+
+    function openAdmin(){
+      adminModal.classList.add("show");
+      adminModal.setAttribute("aria-hidden","false");
+      adminPin.value = "";
+      if(!adminUnlocked){
+        adminContent.style.display = "none";
+      }else{
+        adminContent.style.display = "block";
+        refreshAdmin();
+      }
+      setTimeout(()=>adminPin.focus(), 120);
+    }
+
+    function closeAdmin(){
+      adminModal.classList.remove("show");
+      adminModal.setAttribute("aria-hidden","true");
+    }
+
+    adminOpenBtn.addEventListener("click", openAdmin);
+    adminCloseBtn.addEventListener("click", closeAdmin);
+
+    adminModal.addEventListener("click", (ev)=>{
+      if(ev.target === adminModal) closeAdmin();
+    });
+
+    document.addEventListener("keydown", (ev)=>{
+      if(ev.key === "Escape" && adminModal.classList.contains("show")) closeAdmin();
+    });
+
+    function whenLabel(ts){
+      return new Date(ts).toLocaleString([], {year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit"});
+    }
+
+    function buttonHTML(text, cls, dataAttr){
+      return `<button class="${cls}" type="button" ${dataAttr}>${escapeHtml(text)}</button>`;
+    }
+
+    function refreshAdmin(){
+      const songs = load(KEY_SONGS).slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+      const msgs  = load(KEY_MSGS).slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+
+      songCount.textContent = `${songs.length} total`;
+      msgCount.textContent  = `${msgs.length} total`;
+
+      // Songs list
+      adminSongs.innerHTML = "";
+      if(songs.length === 0){
+        const el = document.createElement("div");
+        el.className = "admin-item";
+        el.innerHTML = `<strong>No songs saved on this device.</strong>`;
+        adminSongs.appendChild(el);
+      }else{
+        for(const s of songs){
+          const el = document.createElement("div");
+          el.className = "admin-item";
+          el.innerHTML = `
+            <div class="item-top">
+              <strong>${escapeHtml(s.name || "Guest")}</strong>
+              <div class="meta">${escapeHtml(whenLabel(s.createdAt || Date.now()))}</div>
+            </div>
+            <div class="p" style="margin:0;"><b>Song:</b> ${escapeHtml(s.song || "—")}</div>
+            <div class="p" style="margin:0; font-size:14px;">${s.phone ? ("Phone: " + escapeHtml(s.phone)) : "Phone: —"}</div>
+            <div class="admin-actions">
+              ${buttonHTML("Delete", "danger", `data-del-song="${escapeHtml(s.id)}"`) }
+            </div>
+          `;
+          adminSongs.appendChild(el);
+        }
+      }
+
+      // Messages list
+      adminMsgs.innerHTML = "";
+      if(msgs.length === 0){
+        const el = document.createElement("div");
+        el.className = "admin-item";
+        el.innerHTML = `<strong>No messages saved on this device.</strong>`;
+        adminMsgs.appendChild(el);
+      }else{
+        for(const m of msgs){
+          const rel = m.relation ? (" • " + m.relation) : "";
+          const el = document.createElement("div");
+          el.className = "admin-item";
+          el.innerHTML = `
+            <div class="item-top">
+              <strong>${escapeHtml((m.name || "Guest") + rel)}</strong>
+              <div class="meta">${escapeHtml(whenLabel(m.createdAt || Date.now()))}</div>
+            </div>
+            <div class="p" style="margin:0;">${escapeHtml(m.message || "—")}</div>
+            <div class="admin-actions">
+              ${buttonHTML("Delete", "danger", `data-del-msg="${escapeHtml(m.id)}"`) }
+            </div>
+          `;
+          adminMsgs.appendChild(el);
+        }
+      }
+
+      // Hook delete handlers
+      adminSongs.querySelectorAll("[data-del-song]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const id = btn.getAttribute("data-del-song");
+          deleteSong(id);
+        });
+      });
+      adminMsgs.querySelectorAll("[data-del-msg]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const id = btn.getAttribute("data-del-msg");
+          deleteMsg(id);
+        });
+      });
+    }
+
+    function deleteSong(id){
+      const songs = load(KEY_SONGS);
+      const target = songs.find(x=>x.id===id);
+      if(!target) return;
+      if(!confirm(`Delete this song from "${target.name}"?`)) return;
+
+      const next = songs.filter(x=>x.id!==id);
+      save(KEY_SONGS, next);
+      refreshPublic();
+      refreshAdmin();
+      showToast(adminActionToast);
+    }
+
+    function deleteMsg(id){
+      const msgs = load(KEY_MSGS);
+      const target = msgs.find(x=>x.id===id);
+      if(!target) return;
+      if(!confirm(`Delete this message from "${target.name}"?`)) return;
+
+      const next = msgs.filter(x=>x.id!==id);
+      save(KEY_MSGS, next);
+      refreshPublic();
+      refreshAdmin();
+      showToast(adminActionToast);
+    }
+
+    function tryLogin(){
+      const pin = (adminPin.value || "").trim();
+      if(pin === ADMIN_PIN){
+        adminUnlocked = true;
+        adminContent.style.display = "block";
+        showToast(adminToast);
+        refreshAdmin();
+      }else{
+        showToast(adminToastErr);
+      }
+    }
+
+    adminLoginBtn.addEventListener("click", tryLogin);
+    adminPin.addEventListener("keydown", (ev)=>{
+      if(ev.key === "Enter") tryLogin();
+    });
+
+    adminExportAll.addEventListener("click", ()=>{
+      downloadJSON("WoaudHamair_AllSubmissions.json", {
+        exportedAt: new Date().toISOString(),
+        wedding: WEDDING,
+        songs: load(KEY_SONGS),
+        messages: load(KEY_MSGS)
+      });
+    });
+
+    adminClearAll.addEventListener("click", ()=>{
+      if(!confirm("Delete ALL songs + messages saved on this device?")) return;
+      localStorage.removeItem(KEY_SONGS);
+      localStorage.removeItem(KEY_MSGS);
+      refreshPublic();
+      refreshAdmin();
+      showToast(adminActionToast);
     });
   </script>
 </body>
