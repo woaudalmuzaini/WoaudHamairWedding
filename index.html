@@ -1,156 +1,786 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Wedding Website | Woaud & Hamair</title>
+  <title>Wedding | Woaud & Hamair</title>
 
-  <!-- Fonts -->
+  <!-- Elegant fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- React -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-
-  <!-- Chart -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-
-  <!-- Excel -->
-  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            blush: {
-              50:"#fff1f6",100:"#ffe4ee",200:"#ffc7dc",300:"#ff9fc3",400:"#ff6da5",500:"#ff3d87"
-            }
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
+    :root{
+      --ink:#2a1f29;
+      --muted:#6b5a66;
+      --pink-50:#fff1f6;
+      --pink-100:#ffe4ee;
+      --pink-200:#ffc7dc;
+      --pink-300:#ff9fc3;
+      --pink-400:#ff6da5;
+      --pink-500:#ff3d87;
+      --card: rgba(255,255,255,0.72);
+      --stroke: rgba(255,61,135,0.16);
+      --shadow: 0 18px 48px rgba(42,31,41,0.10);
+      --ring: 0 0 0 6px rgba(255,61,135,0.14);
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
-      font-family:"Cormorant Garamond",serif;
-      background:linear-gradient(180deg,#fff,#fff1f6);
-      color:#2a1f29;
+      margin:0;
+      color:var(--ink);
+      font-family:"Cormorant Garamond","Georgia",serif;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+
+      background:
+        radial-gradient(1100px 650px at 75% 10%, rgba(255,228,238,0.95), transparent 60%),
+        radial-gradient(800px 520px at 15% 18%, rgba(255,241,246,0.98), transparent 55%),
+        linear-gradient(180deg, #ffffff, rgba(255,241,246,0.92));
     }
-    .panel{
-      background:rgba(255,255,255,.85);
-      border-radius:20px;
-      border:1px solid rgba(255,61,135,.2);
-      padding:1.5rem;
+
+    /* soft tulip pattern + vignette */
+    .bg::before{
+      content:"";
+      position:fixed; inset:0;
+      z-index:0; pointer-events:none;
+      opacity:0.14;
+      background-size: 340px 340px;
+      background-repeat:repeat;
+      background-position:center;
+      filter: blur(0.25px);
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='340' viewBox='0 0 340 340'%3E%3Cdefs%3E%3CradialGradient id='g' cx='52%25' cy='30%25' r='75%25'%3E%3Cstop offset='0%25' stop-color='%23ffe4ee'/%3E%3Cstop offset='100%25' stop-color='%23ffffff' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='340' height='340' fill='url(%23g)'/%3E%3Cg opacity='0.92' transform='translate(78 82)'%3E%3Cpath d='M35 140c11-36 4-65-11-101-8-19-6-41 4-59' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M75 143c0-44-15-74-26-104-8-19-4-42 11-59' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M116 140c-11-37-3-63 15-99 10-19 10-39 0-58' fill='none' stroke='%23ff3d87' stroke-opacity='0.55' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M46 60c9-19 24-21 33-4 9-17 24-15 33 4-6 28-22 44-33 52-11-8-27-24-33-52z' fill='%23ff6da5' fill-opacity='0.62'/%3E%3Cpath d='M79 38c5-13 18-13 24 0-3 17-13 26-18 31-6-4-16-14-6-31z' fill='%23ffc7dc' fill-opacity='0.85'/%3E%3C/g%3E%3C/svg%3E");
     }
-    .btn{
+    .bg::after{
+      content:"";
+      position:fixed; inset:0;
+      z-index:0; pointer-events:none;
+      background: radial-gradient(900px 520px at 50% 0%, rgba(255,255,255,0.35), transparent 60%);
+    }
+
+    .wrap{
+      position:relative; z-index:1;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 18px 18px 90px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding-top: env(safe-area-inset-top);
+    }
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
       border-radius:999px;
-      padding:.7rem 1.2rem;
+      background: rgba(255,255,255,0.62);
+      border:1px solid var(--stroke);
+      box-shadow: 0 10px 30px rgba(42,31,41,0.06);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-weight:700;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      font-size:12px;
+      color: var(--muted);
+      user-select:none;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:10px; height:10px;
+      border-radius:999px;
+      background: var(--pink-500);
+      box-shadow: 0 0 0 5px rgba(255,61,135,0.14);
+    }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .hero{
+      margin-top: 14px;
+      padding: 26px 18px 18px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero-inner{
+      display:grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 18px;
+      align-items:center;
+    }
+    @media (max-width: 900px){
+      .hero-inner{ grid-template-columns: 1fr; }
+    }
+
+    .kicker{
+      font-weight:800;
+      letter-spacing:0.32em;
+      text-transform:uppercase;
+      font-size:11px;
+      color: var(--muted);
+    }
+
+    .names{
+      font-family:"Playfair Display","Cormorant Garamond",serif;
+      font-weight:800;
+      line-height:0.95;
+      letter-spacing:0.01em;
+      margin: 10px 0 12px;
+      font-size: clamp(44px, 6vw, 76px);
+    }
+
+    .subtitle{
+      color: var(--muted);
+      font-size: 18px;
+      line-height:1.7;
+      max-width: 58ch;
+      margin: 0;
+    }
+
+    .details{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.58);
+      border: 1px solid rgba(255,61,135,0.10);
+    }
+    .detail{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.60);
+      border: 1px solid rgba(255,61,135,0.10);
+    }
+    .detail b{
+      font-family:"Playfair Display","Cormorant Garamond",serif;
+      font-weight:800;
+      font-size: 14px;
+      letter-spacing:0.14em;
+      text-transform:uppercase;
+      color: var(--muted);
+    }
+    .detail span{
+      font-weight:800;
+      font-size: 18px;
+      text-align:right;
+    }
+
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(255,61,135,0.22), transparent);
+      margin: 18px 0;
+    }
+
+    .countdown{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+    @media (max-width: 520px){
+      .countdown{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    .tile{
+      padding: 14px 12px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.58);
+      border:1px solid rgba(255,61,135,0.10);
+      text-align:center;
+    }
+    .num{
+      font-family:"Playfair Display","Cormorant Garamond",serif;
+      font-weight:900;
+      font-size: 38px;
+      line-height:1;
+    }
+    .lab{
+      margin-top: 8px;
+      font-weight:800;
+      letter-spacing:0.26em;
+      text-transform:uppercase;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .section{
+      padding: 18px;
+    }
+    .h2{
+      font-family:"Playfair Display","Cormorant Garamond",serif;
+      font-weight:900;
+      font-size: 28px;
+      margin:0 0 6px;
+    }
+    .p{
+      color: var(--muted);
+      font-size: 16px;
+      line-height:1.7;
+      margin:0;
+    }
+
+    .form{
+      margin-top: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 560px){
+      .row{ grid-template-columns: 1fr; }
+    }
+    label{
+      font-weight:800;
+      letter-spacing:0.08em;
+      font-size: 12px;
+      text-transform:uppercase;
+      color: var(--muted);
+      display:block;
+      margin: 2px 0 6px;
+    }
+    input, textarea{
+      width:100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,61,135,0.18);
+      background: rgba(255,255,255,0.90);
+      padding: 12px 14px;
+      font-size: 16px;
+      outline: none;
+      font-family: inherit;
+    }
+    textarea{ min-height: 110px; resize: vertical; }
+    input:focus, textarea:focus{ box-shadow: var(--ring); border-color: rgba(255,61,135,0.55); }
+
+    .btns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 6px;
+    }
+    button{
+      cursor:pointer;
+      border:0;
+      border-radius: 999px;
+      padding: 12px 14px;
+      font-weight:900;
+      letter-spacing:0.02em;
+      font-family:"Playfair Display","Cormorant Garamond",serif;
+      min-height: 44px;
+      transition: transform 140ms ease, box-shadow 140ms ease, opacity 140ms ease;
+    }
+    button:active{ transform: translateY(1px); }
+    .primary{
+      color:#fff;
+      background: linear-gradient(180deg, rgba(255,61,135,1), rgba(255,109,165,1));
+      box-shadow: 0 14px 28px rgba(255,61,135,0.20);
+    }
+    .secondary{
+      color: var(--ink);
+      background: rgba(255,255,255,0.78);
+      border:1px solid rgba(255,61,135,0.18);
+    }
+
+    .toast{
+      display:none;
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(255,61,135,0.18);
+      color: var(--muted);
       font-weight:700;
     }
-    .btn-primary{background:#ff3d87;color:#fff;}
-    .btn-secondary{border:1px solid #ff3d87;color:#ff3d87;}
-    .btn-danger{background:#e11d48;color:#fff;}
-    input,select,textarea{
-      width:100%;
-      padding:.7rem 1rem;
-      border-radius:14px;
-      border:1px solid rgba(255,61,135,.3);
+    .toast.show{ display:block; }
+
+    .recent{
+      margin-top: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .item{
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.60);
+      border: 1px solid rgba(255,61,135,0.10);
+    }
+    .item-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .item strong{
+      font-family:"Playfair Display","Cormorant Garamond",serif;
+      font-weight:900;
+      font-size: 16px;
+    }
+    .meta{
+      color: var(--muted);
+      font-size: 12px;
+      font-weight:800;
+      letter-spacing:0.12em;
+      text-transform:uppercase;
+      text-align:right;
+      white-space:nowrap;
+    }
+    .item p{
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height:1.6;
+      font-size: 15px;
+    }
+
+    footer{
+      margin-top: 18px;
+      padding-bottom: env(safe-area-inset-bottom);
+      text-align:center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Floral illustration anchored bottom-right like the card */
+    .floral{
+      position:absolute;
+      right:-10px;
+      bottom:-8px;
+      width:min(520px, 92vw);
+      opacity:0.92;
+      pointer-events:none;
+      transform: rotate(-0.4deg);
+      filter: drop-shadow(0 18px 28px rgba(42,31,41,0.08));
+    }
+
+    /* print */
+    @media print{
+      .no-print{ display:none !important; }
+      body{ background:#fff !important; }
+      .bg::before,.bg::after{ display:none !important; }
+      .wrap{ padding:0; }
+      .card{ box-shadow:none !important; background:#fff !important; }
     }
   </style>
 </head>
 
-<body>
-<div id="root"></div>
+<body class="bg">
+  <main class="wrap">
+    <div class="topbar">
+      <div class="badge"><span class="pill"></span> Wedding Invitation</div>
+      <div class="badge" title="Baby pink theme">Baby Pink</div>
+    </div>
 
-<script>
-(() => {
-const e = React.createElement;
+    <section class="card hero" aria-label="Wedding invitation">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">With joyful hearts</div>
+          <h1 class="names">Woaud &amp; Hamair</h1>
+          <p class="subtitle">
+            We would love for you to celebrate with us and share a sweet message for the bride,
+            plus your favorite song suggestion for the wedding.
+          </p>
 
-/* ---------------- DATA ---------------- */
-const WEDDING = {
-  couple:"Woaud & Hamair",
-  dateISO:"2026-01-15T20:00:00+04:00",
-  dateLabel:"15 January 2026",
-  timeLabel:"8:00 PM",
-  location:"Alnuman Palace Hall / Barka"
-};
+          <div class="divider"></div>
 
-const DB="WeddingDB";
-const STORE="rsvps";
+          <div class="kicker">Countdown</div>
+          <div class="countdown" role="timer" aria-live="polite">
+            <div class="tile"><div class="num" id="cd-days">—</div><div class="lab">Days</div></div>
+            <div class="tile"><div class="num" id="cd-hours">—</div><div class="lab">Hours</div></div>
+            <div class="tile"><div class="num" id="cd-mins">—</div><div class="lab">Minutes</div></div>
+            <div class="tile"><div class="num" id="cd-secs">—</div><div class="lab">Seconds</div></div>
+          </div>
+        </div>
 
-/* ---------------- DB ---------------- */
-function openDB(){
-  return new Promise(res=>{
-    const r=indexedDB.open(DB,1);
-    r.onupgradeneeded=()=>r.result.createObjectStore(STORE,{keyPath:"id"});
-    r.onsuccess=()=>res(r.result);
-  });
-}
-async function getAll(){
-  const db=await openDB();
-  return new Promise(res=>{
-    const tx=db.transaction(STORE);
-    tx.objectStore(STORE).getAll().onsuccess=e=>res(e.target.result||[]);
-  });
-}
-async function put(item){
-  const db=await openDB();
-  db.transaction(STORE,"readwrite").objectStore(STORE).put(item);
-}
+        <aside class="details" aria-label="Wedding details">
+          <div class="detail">
+            <b>Date</b>
+            <span>15 January 2026</span>
+          </div>
+          <div class="detail">
+            <b>Day</b>
+            <span>Thursday</span>
+          </div>
+          <div class="detail">
+            <b>Time</b>
+            <span>8:00 PM</span>
+          </div>
+          <div class="detail">
+            <b>Location</b>
+            <span>Al Numan Palace Hall</span>
+          </div>
+          <div class="detail">
+            <b>Notes</b>
+            <span>Welcome 💗</span>
+          </div>
+        </aside>
+      </div>
 
-/* ---------------- APP ---------------- */
-function App(){
-  const [tab,setTab]=React.useState("home");
-  const [items,setItems]=React.useState([]);
-  const [form,setForm]=React.useState({name:"",song:"",status:"unknown"});
+      <!-- floral / candles inspired by your invitation card -->
+      <svg class="floral" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="cloth" x1="0" x2="1">
+            <stop offset="0" stop-color="#f6d7df"/>
+            <stop offset="1" stop-color="#fff1f6"/>
+          </linearGradient>
+          <linearGradient id="stem" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#2f7a57"/>
+            <stop offset="1" stop-color="#1f5f43"/>
+          </linearGradient>
+          <linearGradient id="petal" x1="0" x2="1">
+            <stop offset="0" stop-color="#ff9fc3"/>
+            <stop offset="1" stop-color="#ff6da5"/>
+          </linearGradient>
+          <linearGradient id="petal2" x1="0" x2="1">
+            <stop offset="0" stop-color="#ffc7dc"/>
+            <stop offset="1" stop-color="#ffe4ee"/>
+          </linearGradient>
+        </defs>
 
-  React.useEffect(()=>{ getAll().then(setItems); },[]);
+        <!-- draped cloth -->
+        <path d="M110,350 C220,260 360,280 470,320 C590,365 710,350 820,300 L900,420 L0,420 L0,330 C30,330 70,340 110,350Z"
+              fill="url(#cloth)" opacity="0.95"/>
 
-  const filtered = items.filter(x => true); // ✅ FIXED (no crash)
+        <!-- candles -->
+        <g opacity="0.92">
+          <rect x="610" y="120" width="22" height="190" rx="10" fill="#f7efe9" stroke="rgba(42,31,41,0.10)"/>
+          <rect x="662" y="90" width="28" height="220" rx="12" fill="#f7efe9" stroke="rgba(42,31,41,0.10)"/>
+          <path d="M621 110 C626 96 636 96 641 110 C636 122 626 122 621 110Z" fill="#ffd6a6"/>
+          <path d="M675 78 C681 60 693 60 699 78 C693 96 681 96 675 78Z" fill="#ffd6a6"/>
+        </g>
 
-  async function quickSave(){
-    if(!form.name.trim()){ alert("Name required"); return; }
-    const item={
-      id:Date.now().toString(),
-      name:form.name,
-      song:form.song,
-      status:"unknown",
-      createdAt:Date.now()
+        <!-- greenery base -->
+        <path d="M0,330 C120,290 240,320 360,340 C480,362 620,356 900,300 L900,420 L0,420Z"
+              fill="#d7eadf" opacity="0.65"/>
+
+        <!-- flowers group -->
+        <g transform="translate(70,210)">
+          <!-- stems -->
+          <path d="M80 180 C88 120 64 80 48 40" stroke="url(#stem)" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9"/>
+          <path d="M150 190 C158 120 140 75 122 35" stroke="url(#stem)" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9"/>
+          <path d="M230 182 C236 122 258 78 286 34" stroke="url(#stem)" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.9"/>
+
+          <!-- tulips -->
+          <g>
+            <path d="M34 58 C54 18 92 18 112 58 C104 98 74 116 73 116 C72 116 42 98 34 58Z"
+                  fill="url(#petal)" opacity="0.9"/>
+            <path d="M106 70 C114 48 140 46 150 70 C144 92 128 104 128 104 C128 104 112 92 106 70Z"
+                  fill="url(#petal2)" opacity="0.95"/>
+            <path d="M254 70 C262 48 288 46 298 70 C292 92 276 104 276 104 C276 104 260 92 254 70Z"
+                  fill="url(#petal2)" opacity="0.95"/>
+            <path d="M210 58 C230 18 268 18 288 58 C280 98 250 116 249 116 C248 116 218 98 210 58Z"
+                  fill="url(#petal)" opacity="0.9"/>
+          </g>
+
+          <!-- white blossoms -->
+          <g opacity="0.92">
+            <circle cx="22" cy="160" r="16" fill="#fff"/>
+            <circle cx="42" cy="164" r="14" fill="#fff"/>
+            <circle cx="34" cy="178" r="12" fill="#fff"/>
+            <circle cx="210" cy="168" r="16" fill="#fff"/>
+            <circle cx="230" cy="170" r="14" fill="#fff"/>
+            <circle cx="220" cy="184" r="12" fill="#fff"/>
+            <circle cx="132" cy="166" r="14" fill="#fff"/>
+            <circle cx="148" cy="170" r="12" fill="#fff"/>
+          </g>
+        </g>
+
+        <!-- foreground soft shadow -->
+        <path d="M0,398 C180,368 320,382 470,404 C620,426 740,420 900,392 L900,420 L0,420Z"
+              fill="#2a1f29" opacity="0.035"/>
+      </svg>
+    </section>
+
+    <div class="grid">
+      <section class="card section" aria-label="Song suggestion">
+        <h2 class="h2">Suggest a Song</h2>
+        <p class="p">Tell us the song you would love to dance to during the wedding.</p>
+
+        <form class="form" id="songForm">
+          <div class="row">
+            <div>
+              <label for="guestName1">Your Name</label>
+              <input id="guestName1" name="name" placeholder="Example: Fatema Al Rashdi" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="guestPhone1">Phone (optional)</label>
+              <input id="guestPhone1" name="phone" placeholder="Optional" inputmode="tel" autocomplete="tel" />
+            </div>
+          </div>
+
+          <div>
+            <label for="song">Song Title + Artist</label>
+            <input id="song" name="song" placeholder="Example: Perfect — Ed Sheeran" required />
+          </div>
+
+          <div class="btns">
+            <button class="primary" type="submit">Send Song</button>
+            <button class="secondary" type="button" id="exportBtn">Export My Submissions</button>
+          </div>
+
+          <div class="toast" id="songToast">Thank you 💗 Your song suggestion has been saved.</div>
+        </form>
+
+        <div class="recent" id="songRecent" aria-label="Recent song suggestions (this device)"></div>
+      </section>
+
+      <section class="card section" aria-label="Message to the bride">
+        <h2 class="h2">Message for the Bride</h2>
+        <p class="p">Write something sweet — your words will make the day even more special.</p>
+
+        <form class="form" id="msgForm">
+          <div class="row">
+            <div>
+              <label for="guestName2">Your Name</label>
+              <input id="guestName2" name="name" placeholder="Example: Aisha Al Hinai" autocomplete="name" required />
+            </div>
+            <div>
+              <label for="relation">Relationship (optional)</label>
+              <input id="relation" name="relation" placeholder="Friend / Cousin / Colleague..." />
+            </div>
+          </div>
+
+          <div>
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+          </div>
+
+          <div class="btns">
+            <button class="primary" type="submit">Send Message</button>
+            <button class="secondary" type="button" id="exportBtn2">Export My Submissions</button>
+          </div>
+
+          <div class="toast" id="msgToast">Thank you 💗 Your message has been saved.</div>
+        </form>
+
+        <div class="recent" id="msgRecent" aria-label="Recent messages (this device)"></div>
+      </section>
+    </div>
+
+    <footer class="card" style="padding:14px 16px; margin-top:14px;">
+      <div style="font-weight:900; font-family:'Playfair Display',serif;">Woaud &amp; Hamair</div>
+      <div>15 January 2026 • Al Numan Palace Hall</div>
+      <div style="opacity:0.95; margin-top:6px;">
+        This website saves submissions on the guest’s device (privacy-friendly). You can export them anytime.
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // --- Settings (edit these if you want) ---
+    const WEDDING = {
+      names: "Woaud & Hamair",
+      // Wedding date: 15 January 2026 at 8:00 PM Oman time (UTC+4)
+      targetISO: "2026-01-15T20:00:00+04:00",
+      location: "Al Numan Palace Hall"
     };
-    await put(item);
-    setItems([item,...items]);
-    setForm({name:"",song:"",status:"unknown"});
-    setTab("dashboard");
-  }
 
-  return e("div",{className:"max-w-5xl mx-auto p-4 space-y-8"},[
-    e("h1",{className:"text-5xl font-bold text-center"},WEDDING.couple),
+    // --- Countdown ---
+    const $ = (id)=>document.getElementById(id);
+    const cd = {
+      d: $("cd-days"),
+      h: $("cd-hours"),
+      m: $("cd-mins"),
+      s: $("cd-secs")
+    };
 
-    tab==="home" && e("div",{className:"panel space-y-4"},[
-      e("p",{className:"text-center"},`${WEDDING.dateLabel} · ${WEDDING.timeLabel}`),
-      e("input",{placeholder:"Your name",value:form.name,onChange:e=>setForm({...form,name:e.target.value})}),
-      e("input",{placeholder:"Song request",value:form.song,onChange:e=>setForm({...form,song:e.target.value})}),
-      e("button",{className:"btn btn-primary w-full",onClick:quickSave},"Submit RSVP + Song")
-    ]),
+    function pad2(n){ return String(n).padStart(2,"0"); }
 
-    tab==="dashboard" && e("div",{className:"panel space-y-4"},[
-      e("h2",{className:"text-2xl font-bold"},"RSVP Dashboard"),
-      filtered.length===0 && e("p",null,"No RSVPs yet"),
-      filtered.map(r=>e("div",{key:r.id,className:"border-b pb-2"},`${r.name} — ${r.song||"No song"}`)),
-      e("button",{className:"btn btn-secondary",onClick:()=>setTab("home")},"Back")
-    ])
-  ]);
-}
+    function tick(){
+      const target = new Date(WEDDING.targetISO).getTime();
+      const now = Date.now();
+      const diff = Math.max(0, target - now);
 
-ReactDOM.createRoot(document.getElementById("root")).render(e(App));
-})();
-</script>
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const mins = Math.floor((totalSeconds % 3600) / 60);
+      const secs = totalSeconds % 60;
+
+      cd.d.textContent = String(days);
+      cd.h.textContent = pad2(hours);
+      cd.m.textContent = pad2(mins);
+      cd.s.textContent = pad2(secs);
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // --- Local storage keys ---
+    const KEY_SONGS = "whw_songs_v1";
+    const KEY_MSGS  = "whw_msgs_v1";
+
+    function load(key){
+      try{ return JSON.parse(localStorage.getItem(key) || "[]"); }
+      catch{ return []; }
+    }
+    function save(key, arr){
+      localStorage.setItem(key, JSON.stringify(arr));
+    }
+
+    // --- Render recent cards (this device) ---
+    function renderRecent(container, items, type){
+      container.innerHTML = "";
+      const recent = items.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,3);
+      if(recent.length === 0){
+        const empty = document.createElement("div");
+        empty.className = "item";
+        empty.innerHTML = "<strong>No submissions yet</strong><p>Be the first 💗</p>";
+        container.appendChild(empty);
+        return;
+      }
+
+      for(const r of recent){
+        const el = document.createElement("div");
+        el.className = "item";
+
+        const when = new Date(r.createdAt).toLocaleString([], {year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit"});
+        const title = (r.name || "Guest").trim();
+
+        let body = "";
+        if(type === "song"){
+          body = `<p><b>Song:</b> ${escapeHtml(r.song || "—")}</p>`;
+        }else{
+          const rel = r.relation ? ` • ${escapeHtml(r.relation)}` : "";
+          body = `<p>${escapeHtml(r.message || "—")}</p><p style="margin-top:8px; font-size:12px; letter-spacing:0.12em; text-transform:uppercase;">${escapeHtml(title)}${rel}</p>`;
+        }
+
+        el.innerHTML = `
+          <div class="item-top">
+            <strong>${escapeHtml(title)}</strong>
+            <div class="meta">${escapeHtml(when)}</div>
+          </div>
+          ${body}
+        `;
+        container.appendChild(el);
+      }
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, s => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      })[s]);
+    }
+
+    const songRecent = $("songRecent");
+    const msgRecent  = $("msgRecent");
+    function refresh(){
+      renderRecent(songRecent, load(KEY_SONGS), "song");
+      renderRecent(msgRecent,  load(KEY_MSGS),  "msg");
+    }
+    refresh();
+
+    // --- Toast helper ---
+    function showToast(el){
+      el.classList.add("show");
+      setTimeout(()=>el.classList.remove("show"), 2600);
+    }
+
+    // --- Song form ---
+    $("songForm").addEventListener("submit", (ev)=>{
+      ev.preventDefault();
+      const fd = new FormData(ev.target);
+      const name = (fd.get("name") || "").toString().trim();
+      const phone = (fd.get("phone") || "").toString().trim();
+      const song = (fd.get("song") || "").toString().trim();
+
+      if(!name){ alert("Please enter your name."); return; }
+      if(!song){ alert("Please enter a song."); return; }
+
+      const list = load(KEY_SONGS);
+      list.unshift({
+        id: crypto?.randomUUID ? crypto.randomUUID() : ("id_" + Date.now() + "_" + Math.random().toString(16).slice(2)),
+        name, phone, song,
+        createdAt: Date.now()
+      });
+      save(KEY_SONGS, list);
+
+      ev.target.reset();
+      showToast($("songToast"));
+      refresh();
+    });
+
+    // --- Message form ---
+    $("msgForm").addEventListener("submit", (ev)=>{
+      ev.preventDefault();
+      const fd = new FormData(ev.target);
+      const name = (fd.get("name") || "").toString().trim();
+      const relation = (fd.get("relation") || "").toString().trim();
+      const message = (fd.get("message") || "").toString().trim();
+
+      if(!name){ alert("Please enter your name."); return; }
+      if(!message){ alert("Please write a message."); return; }
+
+      const list = load(KEY_MSGS);
+      list.unshift({
+        id: crypto?.randomUUID ? crypto.randomUUID() : ("id_" + Date.now() + "_" + Math.random().toString(16).slice(2)),
+        name, relation, message,
+        createdAt: Date.now()
+      });
+      save(KEY_MSGS, list);
+
+      ev.target.reset();
+      showToast($("msgToast"));
+      refresh();
+    });
+
+    // --- Export buttons (downloads JSON) ---
+    function downloadJSON(filename, payload){
+      const blob = new Blob([JSON.stringify(payload, null, 2)], {type:"application/json"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    $("exportBtn").addEventListener("click", ()=>{
+      downloadJSON("WoaudHamair_Songs.json", {
+        exportedAt: new Date().toISOString(),
+        wedding: WEDDING,
+        songs: load(KEY_SONGS)
+      });
+    });
+
+    $("exportBtn2").addEventListener("click", ()=>{
+      downloadJSON("WoaudHamair_Messages.json", {
+        exportedAt: new Date().toISOString(),
+        wedding: WEDDING,
+        messages: load(KEY_MSGS)
+      });
+    });
+  </script>
 </body>
 </html>
