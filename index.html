@@ -359,7 +359,7 @@
         const filtered = items.filter(x=>{
           const hay = ((x.name||"")+" "+(x.phone||"")+" "+(x.message||"")+" "+(x.song||"")).toLowerCase();
           const matchesQ = !q || hay.includes(q.toLowerCase());
-          const matchesStatus = statusFilter==="all" ? true : x.status===statusFilter;
+          const matchesStatus = statusFilter==="all ? true : x.status===statusFilter;
           return matchesQ && matchesStatus;
         });
 
@@ -540,6 +540,37 @@
           ]);
         }
 
+        // ✅ NEW: quick-save from Home (Song Request panel)
+        async function quickSaveFromHome(){
+          const name = (form.name||"").trim();
+          if(!name){ alert("Please enter your name."); return; }
+
+          const now = Date.now();
+          const item = {
+            id: uid(),
+            name,
+            phone: "",
+            status: "unknown",
+            message: "",
+            song: (form.song||"").trim(),
+            createdAt: now,
+            updatedAt: now
+          };
+
+          try{
+            await dbPut(item);
+            const next = items.slice();
+            next.unshift(item);
+            next.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+            setItems(next);
+            setForm({ id:null, name:"", phone:"", status:"attending", message:"", song:"" });
+            go("dashboard");
+          }catch(err){
+            console.error(err);
+            alert("Could not save.");
+          }
+        }
+
         function Home(){
           return e("div",{className:"space-y-10"},[
             e("div",{className:"text-center space-y-4"},[
@@ -597,7 +628,8 @@
                   value: form.song,
                   onChange:(ev)=>setForm(Object.assign({}, form, {song: ev.target.value}))
                 })),
-                e(Button,{variant:"primary", onClick:()=>go("dashboard"), className:"w-full no-print"}, "Submit RSVP + Song")
+                // ✅ FIX: this now saves to IndexedDB then goes to dashboard
+                e(Button,{variant:"primary", type:"button", onClick:quickSaveFromHome, className:"w-full no-print"}, "Submit RSVP + Song")
               ])
             ])
           ]);
@@ -899,6 +931,4 @@
     })();
   </script>
 </body>
-</html>
-
 </html>
